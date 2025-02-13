@@ -1,6 +1,7 @@
 
 
 import { useState } from "react"
+
 import { Bell, Eye, EyeOff, Home, Plus, ArrowRight, PieChart, User, Wallet } from "lucide-react"
 import netflixLogo from "../assets/netflix-logo.png"
 import amazonLogo from "../assets/amazon-logo.png"
