@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Homepage from './Components/Homepage';
 import Statistics from './Components/Statistics';
-import Cards from './Components/cards';  
+import Cards from './Components/Cards';  
 
 const App = () => {
   return (
