@@ -12,7 +12,7 @@ const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:8000/user/deposits', {username, pin})
         .then(res => {
-            localStorage.setItem('token', res.data.balance)
+            localStorage.setItem('token', res.data.balances)
         })
     .catch(error => {
         console.error("Authentication error", error);
