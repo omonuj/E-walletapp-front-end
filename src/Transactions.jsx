@@ -52,5 +52,7 @@ return (
             onChange={e => setPin(e.targetValue)}
         />
         <button type= "submit"> Withdraw Amount </button>
+        <div></div>
     </div>
 )     
+
