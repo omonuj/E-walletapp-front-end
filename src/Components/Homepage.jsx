@@ -1,16 +1,24 @@
+import { useState } from "react";
 
-
-import { useState } from "react"
-
-import { Bell, Eye, EyeOff, Home, Plus, ArrowRight, PieChart, User, Wallet } from "lucide-react"
-import netflixLogo from "../assets/netflix-logo.png"
-import amazonLogo from "../assets/amazon-logo.png"
-import canvaLogo from "../assets/canva-logo.png"
+import {
+  Bell,
+  Eye,
+  EyeOff,
+  Home,
+  Plus,
+  ArrowRight,
+  PieChart,
+  User,
+  Wallet,
+} from "lucide-react";
+import netflixLogo from "../assets/netflix-logo.png";
+import amazonLogo from "../assets/amazon-logo.png";
+import canvaLogo from "../assets/canva-logo.png";
 import Footer from "../Components/footer";
 
 export default function Homepage() {
-  const [showBalance, setShowBalance] = useState(true)
-  const [activeTab, setActiveTab] = useState("home")
+  const [showBalance, setShowBalance] = useState(true);
+  const [activeTab, setActiveTab] = useState("home");
 
   return (
     <div className="max-w-[430px] mx-auto bg-white min-h-screen pb-20 relative font-sans">
@@ -19,8 +27,13 @@ export default function Homepage() {
         <div>
           <p className="text-sm text-gray-500 mb-1">Total Balance</p>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-semibold">{showBalance ? "$8,899,750" : "****"}</h1>
-            <button onClick={() => setShowBalance(!showBalance)} className="text-gray-500">
+            <h1 className="text-2xl font-semibold">
+              {showBalance ? "$8,899,750" : "****"}
+            </h1>
+            <button
+              onClick={() => setShowBalance(!showBalance)}
+              className="text-gray-500 cursor-pointer"
+            >
               {showBalance ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
@@ -31,24 +44,38 @@ export default function Homepage() {
       </div>
 
       {/* Card */}
-      <div className="mx-6 mb-6 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl h-44 relative overflow-hidden">
+      <div className="mx-6 mb-6 bg-gradient-to-b from-blue-700 via-indigo-600 to-blue-300 rounded-2xl h-44 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16"></div>
-        <div className="relative z-10 p-6 h-full flex flex-col justify-between text-white">
-          <p className="text-lg tracking-widest">XXXX XXXX XXXX XXXX</p>
-          <div>
+        <h1 className=" text-lg tracking-widest text-white p-6 relative z-10">
+          XXXX XXXX XXXX XXXX
+        </h1>
+        <div className="flex justify-between px-6 py-9 text-white">
+          <h1>
             <p className="text-sm opacity-80 mb-1">Card Holder</p>
-            <p>John Doe</p>
+            <p className="text-lg">John Doe</p>
+          </h1>
+          <div className="flex items-center z-40 ">
+            <div className="w-9 h-9 bg-red-500 rounded-full z-30" />
+            <div className="w-9 h-9 bg-yellow-400 rounded-full -ml-2" />
           </div>
-          <div className="absolute bottom-6 right-6 w-12 h-8 bg-white/20 rounded"></div>
         </div>
       </div>
 
       {/* Quick Actions */}
       <div className="mx-6 mb-8 grid grid-cols-3 gap-3">
         {["Add money", "Transfer", "Budget"].map((action, index) => (
-          <button key={index} className="bg-blue-500 text-white rounded-full py-3 px-2 flex flex-col items-center">
-            {index === 0 ? <Plus size={20} /> : index === 1 ? <ArrowRight size={20} /> : <PieChart size={20} />}
+          <button
+            key={index}
+            className="bg-blue-500 text-white rounded-full py-3 px-2 flex flex-col items-center"
+          >
+            {index === 0 ? (
+              <Plus size={20} />
+            ) : index === 1 ? (
+              <ArrowRight size={20} />
+            ) : (
+              <PieChart size={20} />
+            )}
             <span className="text-xs mt-1">{action}</span>
           </button>
         ))}
@@ -81,7 +108,10 @@ export default function Homepage() {
               logo: canvaLogo,
             },
           ].map((activity, index) => (
-            <div key={index} className="bg-white shadow rounded-xl p-4 flex items-center gap-4">
+            <div
+              key={index}
+              className="bg-white shadow rounded-xl p-4 flex items-center gap-4"
+            >
               <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
                 <img
                   src={activity.logo || "/placeholder.svg"}
@@ -91,7 +121,9 @@ export default function Homepage() {
               </div>
               <div className="flex-1">
                 <p className="font-medium">{activity.name}</p>
-                <p className="text-sm text-gray-500">{activity.time} , Payment Received</p>
+                <p className="text-sm text-gray-500">
+                  {activity.time} , Payment Received
+                </p>
               </div>
               <p className="text-red-500 font-medium">{activity.amount}</p>
             </div>
@@ -110,7 +142,10 @@ export default function Homepage() {
             { name: "New car", icon: "🚗", amount: "$25,000" },
             { name: "New House", icon: "🏠", amount: "$150,000" },
           ].map((plan, index) => (
-            <div key={index} className="bg-gray-100 rounded-xl p-4 flex items-center gap-3">
+            <div
+              key={index}
+              className="bg-gray-100 rounded-xl p-4 flex items-center gap-3"
+            >
               <span className="text-2xl">{plan.icon}</span>
               <div className="flex-1">
                 <p className="font-medium">{plan.name}</p>
@@ -122,9 +157,7 @@ export default function Homepage() {
         </div>
       </div>
 
-      
-      <Footer/>
+      <Footer />
     </div>
-  )
+  );
 }
-
