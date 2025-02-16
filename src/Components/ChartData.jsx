@@ -19,5 +19,6 @@ export const chartData = {
       { year: "2024", income: 36000, expenses: 70000 },
       { year: "2025", income: 60000, expenses: 40000 },   
     ],
+    
   };
   
