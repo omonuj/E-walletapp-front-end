@@ -3,9 +3,11 @@ import picture from "../assets/picture.png";
 import zenith from "../assets/zenith.png";
 import Footer from "../Components/footer";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Profile = () => {
   const [showQR, setShowQR] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="max-w-[430px] mx-auto bg-white min-h-screen pb-20 relative font-sans flex flex-col items-center">
@@ -13,7 +15,7 @@ const Profile = () => {
       <div className="p-6 w-full">
         {/* Header */}
         <div className="flex justify-between items-center mb-8 w-full">
-          <button className="text-gray-600">
+          <button onClick={() => navigate(-1)} className="text-gray-600 cursor-pointer">
             <ChevronLeft size={24} />
           </button>
           <button className="text-gray-600">

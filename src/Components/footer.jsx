@@ -38,7 +38,7 @@
 
 "use client";
 
-import { Home, PieChart, Wallet, User } from "lucide-react";
+import { Home, PieChart, User, ScanLine, BarChart, CreditCard } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -47,8 +47,9 @@ const Footer = () => {
 
   const navItems = [
     { name: "Home", icon: <Home size={24} />, path: "/" },
-    { name: "Cards", icon: <PieChart size={24} />, path: "/cards" },
-    { name: "Wallet", icon: <Wallet size={24} />, path: "/statistics", special: true },
+    { name: "Stats", icon: <BarChart size={24} />, path: "/statistics"},
+    {name: "Scan", icon: <ScanLine size={24} />, path: "/scanner", special: true },
+    { name: "Cards", icon: <CreditCard size={24} />, path: "/cards" },
     { name: "Profile", icon: <User size={24} />, path: "/profile" },
   ];
 
@@ -60,7 +61,7 @@ const Footer = () => {
           to={item.path}
           onClick={() => setActiveTab(item.name.toLowerCase())}
           className={`flex flex-col items-center ${
-            activeTab === item.name.toLowerCase() ? "text-blue-500" : "text-gray-400"
+            activeTab === item.name.toLowerCase() ? "text-blue-500" : "text-[#413e3e]"
           }`}
         >
           {item.special ? (
