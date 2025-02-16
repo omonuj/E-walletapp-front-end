@@ -2,14 +2,16 @@
 
 import { ChevronLeft, Plus } from "lucide-react";
 import Footer from "../Components/footer"
+import { useNavigate } from "react-router-dom";
 
 const Cards = () => {
+  const navigate = useNavigate();
   return (
     <div className="p-6 max-w-[430px] mx-auto bg-white min-h-screen font-sans">
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-4">
-          <button className="text-gray-600">
+        <button onClick={() => navigate(-1)} className="text-gray-600 cursor-pointer">
             <ChevronLeft size={24} />
           </button>
           <h1 className="text-xl font-semibold">My Card</h1>
@@ -24,10 +26,10 @@ const Cards = () => {
       {/* Cards */}
       <div className="space-y-4 mb-8">
         {[
-          { name: "John Doe", bg: "from-blue-400 to-blue-600" },
-          { name: "British IKEA", bg: "from-yellow-300 to-yellow-500" },
+          { name: "John Doe", bg: "from-blue-500 via-indigo-600 to-blue-300" },
+          { name: "British IKEA", bg: "from-yellow-400 via-yellow-300 to-yellow-100" },
         ].map((card, index) => (
-          <div key={index} className={`p-6 bg-gradient-to-br ${card.bg} text-white rounded-lg shadow-md relative`}>
+          <div key={index} className={`p-6 bg-gradient-to-b ${card.bg} text-white rounded-lg shadow-md relative`}>
             <p className="text-lg tracking-widest mb-6">XXXX XXXX XXXX XXXX</p>
             <p className="mb-2">{card.name}</p>
             <div className="flex justify-between items-center">

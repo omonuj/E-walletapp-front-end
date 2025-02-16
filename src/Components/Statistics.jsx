@@ -2,24 +2,41 @@
 
 import { ChevronLeft } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import Footer from "../Components/footer"
+import Footer from "../Components/footer";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { chartData } from "./ChartData";
 
-const chartData = [
-  { month: "Jan", income: 3000, expenses: 5000 },
-  { month: "Feb", income: 3200, expenses: 5200 },
-  { month: "Mar", income: 2800, expenses: 7500 },
-  { month: "Apr", income: 4200, expenses: 6000 },
-  { month: "May", income: 8000, expenses: 3000 },
-  { month: "Jun", income: 6000, expenses: 7000 },
-];
 
 const Statistics = () => {
+  const navigate = useNavigate();
+  const [activeChart, setActiveChart] = useState("full");
+  const [timePeriod, setTimePeriod] = useState("month");
+
+  const time = ["Day", "Month", "Year"]
+
+  const toggleIncomeChart = () => {
+    setActiveChart(activeChart === "income" ? "full" : "income");
+  };
+
+  const toggleExpensesChart = () => {
+    setActiveChart(activeChart === "expenses" ? "full" : "expenses");
+  };
+
+  const handleTimePeriodChange = (event) => {
+    setTimePeriod(event.target.value);
+  };
+
+  const getChartData = () => {
+    return chartData[timePeriod] || chartData.month;
+  };
+
   return (
     <div className="p-6 max-w-[430px] mx-auto bg-white min-h-screen font-sans relative">
       {/* Header */}
       <div className="flex items-center gap-4 mb-6 justify-center">
-        <button className="text-gray-600 absolute left-6">
-          <ChevronLeft size={24} />
+        <button className="absolute left-4 cursor-pointer" onClick={() => navigate(-1)}>
+          <ChevronLeft size={24} className="outline-none" />
         </button>
         <h1 className="text-xl font-semibold">Statistics</h1>
       </div>
@@ -30,26 +47,45 @@ const Statistics = () => {
         <h2 className="text-2xl font-semibold">$808,788,000.00</h2>
       </div>
 
-      {/* Overview */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="font-medium">Overview</h3>
-          <select className="text-sm border rounded-md px-2 py-1">
-            <option>Month</option>
+          <select className="text-sm border rounded-md px-2 py-1 cursor-pointer outline-none" value={timePeriod} onChange={handleTimePeriodChange}>
+            {time.map((timeOption, index) => (
+              <option key={index} value={timeOption.toLowerCase()}>{timeOption}</option>
+            ))}
           </select>
         </div>
 
         {/* Chart */}
-        <div className="h-[200px] w-full bg-gray-100 rounded-lg shadow-md flex items-center justify-center mb-10">
-          <ResponsiveContainer width="100%" height={200}>
-            <BarChart data={chartData}>
-              <XAxis dataKey="month" stroke="#8884d8" />
+        <div className="w-full bg-gray-100 rounded-lg shadow-md flex flex-col items-center justify-center mb-10 py-4">
+          <ResponsiveContainer width="100%" height={240}>
+            <BarChart data={getChartData()}>
+              <XAxis dataKey={timePeriod} stroke="#8884d8" />
               <YAxis stroke="#8884d8" />
               <Tooltip />
-              <Bar dataKey="income" fill="#3b82f6" />
-              <Bar dataKey="expenses" fill="#f97316" />
+              {/* Conditionally render bars with transitions */}
+              <Bar dataKey="income" fill="#3b82f6" className={`transform transition-all duration-800 ${activeChart === "expenses" ? "opacity-0 scale-y-0" : "opacity-100 scale-y-100"}`}/>
+              <Bar dataKey="expenses" fill="#f97316" className={`transform transition-all duration-800 ${activeChart === "income" ? "opacity-0 scale-y-0" : "opacity-100 scale-y-100"}`}/>
             </BarChart>
           </ResponsiveContainer>
+
+          <div className="flex items-center justify-center gap-5">
+            <button
+              onClick={toggleIncomeChart}
+              className="flex justify-center items-center gap-1 cursor-pointer"
+            >
+              <div className="w-3 h-3 bg-[#3b82f6] rounded-sm"></div>
+              <span className="text-sm text-[#333333]">Income</span>
+            </button>
+            <button
+              onClick={toggleExpensesChart}
+              className="flex justify-center items-center gap-1 cursor-pointer"
+            >
+              <div className="w-3 h-3 bg-[#f97316] rounded-sm"></div>
+              <span className="text-sm text-[#333333]">Expenses</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -82,7 +118,7 @@ const Statistics = () => {
         </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };
