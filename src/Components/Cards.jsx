@@ -1,7 +1,7 @@
 "use client"
 
 import { ChevronLeft, Plus } from "lucide-react";
-import Footer from "../Components/footer"
+import Footer from "./footer"
 import { useNavigate } from "react-router-dom";
 
 const Cards = () => {

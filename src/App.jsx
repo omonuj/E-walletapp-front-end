@@ -17,7 +17,7 @@ const App = () => {
 
         <Route path="/Profile" element={<Profile />} />
         <Route path="/scanner" element={<Scanner />} />
-        
+
       </Routes>
     </Router>
   );
